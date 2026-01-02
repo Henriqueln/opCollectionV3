@@ -1,0 +1,9 @@
+{
+  "routes": {
+    "/opCollectionV3": {},
+    "/opCollectionV3/cards": {},
+    "/opCollectionV3/sets": {},
+    "/opCollectionV3/sets-create": {},
+    "/opCollectionV3/support-strings": {}
+  }
+}
