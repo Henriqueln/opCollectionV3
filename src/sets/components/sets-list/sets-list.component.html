@@ -1,0 +1,24 @@
+<div style="text-align: end;">
+  <p-button icon="pi pi-plus" [rounded]="true" [routerLink]="['/sets-create']"></p-button>
+</div>
+<div class="card">
+  <p-table [value]="sets" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <th>Image</th>
+        <th>Code</th>
+        <th>Name</th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-set>
+      <p-popover #op>
+        <img [src]="'assets/sets/' + set.image + '.png'" />
+      </p-popover>
+      <tr>
+        <td><img (click)="op.toggle($event)" class="img-icon" [src]="'assets/sets/' + set.image + '.png'" /></td>
+        <td>{{ set.code }}</td>
+        <td>{{ set.name }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

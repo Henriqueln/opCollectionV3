@@ -1,1 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}

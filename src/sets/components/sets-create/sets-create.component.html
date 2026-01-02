@@ -1,0 +1,17 @@
+<p-toast />
+<div class="form-container">
+  <p-floatlabel variant="on">
+    <input pInputText id="code" [(ngModel)]="set.code" autocomplete="off" />
+    <label for="code">Code</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="name" [(ngModel)]="set.name" autocomplete="off" />
+    <label for="name">Name</label>
+  </p-floatlabel>
+  <p-floatlabel variant="on">
+    <input pInputText id="image" [(ngModel)]="set.image" autocomplete="off" />
+    <label for="image">Image</label>
+  </p-floatlabel>
+  <p-button (onClick)="createSet()" label="Save" icon="pi pi-check" iconPos="right" />
+</div>
+  

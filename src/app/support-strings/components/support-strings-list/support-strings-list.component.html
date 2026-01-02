@@ -1,0 +1,16 @@
+<p-toast />
+<div style="margin-bottom: 1rem; display: flex; flex-direction: row;" class="form-container">
+  <p-floatlabel variant="on">
+    <input pInputText id="value" [(ngModel)]="stringValue" autocomplete="off" />
+    <label for="value">Value</label>
+  </p-floatlabel>
+  <p-button (onClick)="addCharacterName()" label="Add Character Name" icon="pi pi-check" iconPos="right" />
+  <p-button (onClick)="addEventName()" label="Add Event Name" icon="pi pi-check" iconPos="right" />
+  <p-button (onClick)="addType()" label="Add Type" icon="pi pi-check" iconPos="right" />
+  <p-button (onClick)="save()" label="Save All" icon="pi pi-check" iconPos="right" />
+</div>
+<div style="display: flex;gap: 1rem;"> 
+  <p-listbox style="width: 100%;" [options]="characterNames" class="w-full md:w-56" />
+  <p-listbox style="width: 100%;" [options]="eventNames" class="w-full md:w-56" />
+  <p-listbox style="width: 100%;" [options]="types" class="w-full md:w-56" />
+</div>

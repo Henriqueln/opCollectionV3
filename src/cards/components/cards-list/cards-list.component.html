@@ -1,0 +1,119 @@
+<p-toast />
+@if (createCardActive) {
+<div style="margin-bottom: 1rem;">
+  <div style="display: flex; flex-direction: row; flex-wrap: wrap;" class="form-container">
+    <div style="display: flex; flex-direction: column;">
+      <label for="set">Set</label>
+      <input pInputText id="set" [(ngModel)]="selectedCard.set" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="rarity">Rarity</label>
+      <input pInputText id="rarity" [(ngModel)]="selectedCard.rarity" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="category">Category</label>
+      <input pInputText id="category" [(ngModel)]="selectedCard.category" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="color">Color</label>
+      <input pInputText id="color" [(ngModel)]="selectedCard.color" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="color2">Color 2</label>
+      <input pInputText id="color2" [(ngModel)]="selectedCard.color2" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="type1">Type 1</label>
+      <input pInputText id="type1" [(ngModel)]="selectedCard.type1" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="type2">Type 2</label>
+      <input pInputText id="type2" [(ngModel)]="selectedCard.type2" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="type3">Type 3</label>
+      <input pInputText id="type3" [(ngModel)]="selectedCard.type3" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="source">Source</label>
+      <input pInputText id="source" [(ngModel)]="selectedCard.source" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="code">Code</label>
+      <input pInputText id="code" [(ngModel)]="selectedCard.code" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="name">Name</label>
+      <input pInputText id="name" [(ngModel)]="selectedCard.name" autocomplete="off" />
+    </div>
+    <div style="display: flex; flex-direction: column;">
+      <label for="playset">Playset</label>
+      <input pInputText id="playset" [(ngModel)]="selectedCard.playset" autocomplete="off" />
+    </div>
+    <p-button (onClick)="createCard()" label="Save" icon="pi pi-check" iconPos="right" />
+  </div>
+</div>
+}
+<div style="display: flex;">
+  <p-multiselect style="width: 100%;" [options]="sets" [(ngModel)]="selectedSets" placeholder="Select Sets"
+    display="chip" optionLabel="code">
+    <ng-template let-set #item>
+      <div style="display: flex;gap: 1rem; align-items: center;">
+        <img [src]="'assets/sets/' + set.image + '.png'" style="width: 18px" />
+        <div>{{ set.code }} - {{set.name}}</div>
+      </div>
+    </ng-template>
+  </p-multiselect>
+  <p-button (onClick)="changeFilters()" icon="pi pi-search" [rounded]="true"></p-button>
+</div>
+<div style="text-align: end;">
+  <p-button (onClick)="createCardActive = !createCardActive" icon="pi pi-plus" [rounded]="true"></p-button>
+</div>
+<div class="card">
+  <p-table [value]="cardsFiltered" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template #header>
+      <tr>
+        <!-- <th>Image</th> -->
+        <th>Code</th>
+        <th>Quant.</th>
+        <th></th>
+        <th>Extra</th>
+        <th></th>
+        <th></th>
+        <th>Name</th>
+        <th>Rarity</th>
+        <th>Type 1</th>
+        <th>Type 2</th>
+        <th>Type 3</th>
+        <th>Source</th>
+        <th></th>
+      </tr>
+    </ng-template>
+    <ng-template #body let-card>
+      <p-popover #op>
+        <img style="height: 500px;" [src]="'assets/cards/' + card.code + '.png'" />
+      </p-popover>
+      <tr>
+        <td [ngClass]="getColor(card, card.color)">{{ card.code }}</td>
+        <td [ngClass]="getColor(card, card.color)">
+          <div>
+            <input type="number" [(ngModel)]="incrementValue" style="width: 2rem;" />
+            <button (click)="increment(card)">+</button><button (click)="decrement(card)">-</button>
+          </div>
+        </td>
+        <td [ngClass]="getColor(card, card.color)">{{ card.quantity }}/{{ card.playset }}</td>
+        <td [ngClass]="getColor(card, card.color)">{{ (card.quantity - card.playset) < 0 ? 0 : (card.quantity - card.playset) }}</td>
+        <td [ngClass]="getColor(card, card.color)">{{ card.name }}</td>
+        <td [ngClass]="getColor(card, card.color)"><img (click)="op.toggle($event); selectedCard = card"
+            class="img-icon" [src]="'assets/cards/' + card.code + '.png'" /></td>
+        <td [ngClass]="getColor(card, card.color)">{{ card.name }}</td>
+        <td [ngClass]="getColor(card, card.color2)">{{ card.rarity }}</td>
+        <td [ngClass]="getColor(card, card.color2)">{{ card.type1 }}</td>
+        <td [ngClass]="getColor(card, card.color2)">{{ card.type2 }}</td>
+        <td [ngClass]="getColor(card, card.color2)">{{ card.type3 }}</td>
+        <td [ngClass]="getColor(card, card.color2)">{{ card.source }}</td>
+        <td [ngClass]="getColor(card, card.color2)"><button (click)="generateAlt(card)">ALT</button></td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>
